@@ -1,98 +1,82 @@
-"use client";
-
-import Link from "next/link";
-import { useState } from "react";
-
 export default function RegisterPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] =
-    useState("");
-
-  const handleRegister = async (
-    e: React.FormEvent
-  ) => {
-    e.preventDefault();
-
-    const res = await fetch(
-      "/api/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      }
-    );
-
-    if (res.ok) {
-      window.location.href = "/login";
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-100">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-        <h1 className="text-3xl font-bold text-center">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "420px",
+          background: "#1e293b",
+          padding: "40px",
+          borderRadius: "16px",
+          color: "white",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            marginBottom: "25px",
+          }}
+        >
           Create Account
         </h1>
 
-        <form
-          onSubmit={handleRegister}
-          className="space-y-4 mt-6"
-        >
+        <form>
           <input
-            type="text"
-            placeholder="Name"
-            className="w-full border rounded-lg p-3"
-            value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
+            placeholder="Full Name"
+            style={{
+              width: "100%",
+              padding: "14px",
+              marginBottom: "15px",
+              borderRadius: "8px",
+              border: "none",
+            }}
           />
 
           <input
-            type="email"
             placeholder="Email"
-            className="w-full border rounded-lg p-3"
-            value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
+            type="email"
+            style={{
+              width: "100%",
+              padding: "14px",
+              marginBottom: "15px",
+              borderRadius: "8px",
+              border: "none",
+            }}
           />
 
           <input
-            type="password"
             placeholder="Password"
-            className="w-full border rounded-lg p-3"
-            value={password}
-            onChange={(e) =>
-              setPassword(e.target.value)
-            }
+            type="password"
+            style={{
+              width: "100%",
+              padding: "14px",
+              marginBottom: "20px",
+              borderRadius: "8px",
+              border: "none",
+            }}
           />
 
           <button
-            type="submit"
-            className="w-full bg-black text-white p-3 rounded-lg"
+            style={{
+              width: "100%",
+              padding: "14px",
+              background: "#22c55e",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
           >
-            Register
+            Create Account
           </button>
         </form>
-
-        <p className="text-center mt-5 text-sm">
-          Already have account?{" "}
-          <Link
-            href="/login"
-            className="font-semibold"
-          >
-            Login
-          </Link>
-        </p>
       </div>
     </div>
   );
