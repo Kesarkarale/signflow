@@ -1,0 +1,13 @@
+model Document {
+  id String @id @default(cuid())
+
+  title String
+  fileUrl String
+
+  status String @default("PENDING")
+
+  ownerId String
+  owner User @relation(fields:[ownerId], references:[id])
+
+  createdAt DateTime @default(now())
+}
