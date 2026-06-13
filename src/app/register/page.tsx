@@ -19,7 +19,6 @@ e: React.FormEvent<HTMLFormElement>
 ) {
 e.preventDefault();
 
-```
 if (password !== confirmPassword) {
   alert("Passwords do not match");
   return;
@@ -57,14 +56,12 @@ if (!response.ok) {
 alert("Account created successfully");
 
 router.push("/login");
-```
 
 }
 
 return ( <div className="min-h-screen grid lg:grid-cols-2"> <div className="hidden lg:flex flex-col justify-center bg-gradient-to-br from-green-600 via-green-700 to-slate-900 text-white p-16"> <h1 className="text-6xl font-bold mb-6">
 Join SignFlow </h1>
 
-```
     <p className="text-xl opacity-90 max-w-lg">
       Create your account and
       start signing documents
