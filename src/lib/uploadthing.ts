@@ -1,6 +1,4 @@
-import {
-  generateReactHelpers,
-} from "@uploadthing/react";
+import { generateReactHelpers } from "@uploadthing/react";
 
 import type {
   OurFileRouter,
@@ -9,4 +7,5 @@ import type {
 export const {
   useUploadThing,
   uploadFiles,
-} = generateReactHelpers<OurFileRouter>();
+} =
+  generateReactHelpers<OurFileRouter>();
