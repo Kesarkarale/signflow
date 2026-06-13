@@ -3,77 +3,42 @@
 import { useState } from "react";
 
 export default function UploadPage() {
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] =
+    useState<File | null>(null);
 
-  const handleUpload = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function uploadPdf() {
+    if (!file) return;
 
-    if (!title || !file) {
-      alert("Please fill all fields");
-      return;
-    }
+    const formData = new FormData();
 
-    console.log(title, file);
+    formData.append("file", file);
 
-    alert("Upload feature coming next");
-  };
+    alert("Upload Started");
+  }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border p-8">
-        <h1 className="text-3xl font-bold mb-2">
-          Upload Document
-        </h1>
+    <div className="p-10">
+      <h1 className="text-3xl font-bold mb-6">
+        Upload Document
+      </h1>
 
-        <p className="text-gray-500 mb-8">
-          Upload PDF documents for signatures
-        </p>
+      <div className="bg-white p-8 rounded-2xl border">
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) =>
+            setFile(
+              e.target.files?.[0] || null
+            )
+          }
+        />
 
-        <form
-          onSubmit={handleUpload}
-          className="space-y-6"
+        <button
+          onClick={uploadPdf}
+          className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl"
         >
-          <div>
-            <label className="block mb-2 font-medium">
-              Document Title
-            </label>
-
-            <input
-              type="text"
-              placeholder="Employment Agreement"
-              value={title}
-              onChange={(e) =>
-                setTitle(e.target.value)
-              }
-              className="w-full border rounded-xl p-3"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium">
-              PDF File
-            </label>
-
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={(e) =>
-                setFile(
-                  e.target.files?.[0] || null
-                )
-              }
-              className="w-full border rounded-xl p-3"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl"
-          >
-            Upload Document
-          </button>
-        </form>
+          Upload PDF
+        </button>
       </div>
     </div>
   );
