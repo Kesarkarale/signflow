@@ -9,58 +9,46 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-
-  documents Document[]
+  id         String      @id @default(cuid())
+  name       String?
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  documents  Document[]
   signatures Signature[]
 }
 
 model Document {
-  id         String   @id @default(cuid())
+  id         String      @id @default(cuid())
   title      String
   fileUrl    String
-  status     String   @default("PENDING")
-
+  status     String      @default("PENDING")
   ownerId    String
-  owner      User     @relation(fields: [ownerId], references: [id])
-
-  signatures Signature[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   auditLogs  AuditLog[]
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  owner      User        @relation(fields: [ownerId], references: [id])
+  signatures Signature[]
 }
 
 model Signature {
   id         String   @id @default(cuid())
-
   documentId String
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-
   signerId   String
-  signer     User     @relation(fields: [signerId], references: [id])
-
   x          Float
   y          Float
   page       Int
-
   status     String   @default("PENDING")
-
   createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  signer     User     @relation(fields: [signerId], references: [id])
 }
 
 model AuditLog {
   id         String   @id @default(cuid())
-
   documentId String
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-
   action     String
   ipAddress  String?
-
   createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
