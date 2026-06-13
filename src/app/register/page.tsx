@@ -1,225 +1,181 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function RegisterPage() {
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        fontFamily: "Inter, sans-serif",
-      }}
-    >
-      {/* Left Side */}
-      <div
-        style={{
-          background:
-            "linear-gradient(135deg,#16a34a 0%,#15803d 50%,#0f172a 100%)",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "60px",
-            fontWeight: "bold",
-            marginBottom: "20px",
-          }}
-        >
-          Join SignFlow
-        </h1>
+const router = useRouter();
 
-        <p
-          style={{
-            fontSize: "22px",
-            lineHeight: "1.8",
-            maxWidth: "500px",
-            opacity: 0.9,
-          }}
-        >
-          Create your account and start signing documents
-          securely from anywhere in the world.
-        </p>
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] =
+useState("");
 
-        <div style={{ marginTop: "50px" }}>
-          <div
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              padding: "20px",
-              borderRadius: "12px",
-              marginBottom: "15px",
-            }}
-          >
-            🚀 Unlimited Document Uploads
-          </div>
+const [loading, setLoading] = useState(false);
 
-          <div
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              padding: "20px",
-              borderRadius: "12px",
-              marginBottom: "15px",
-            }}
-          >
-            🔒 Secure Cloud Storage
-          </div>
+async function handleRegister(
+e: React.FormEvent<HTMLFormElement>
+) {
+e.preventDefault();
 
-          <div
-            style={{
-              background: "rgba(255,255,255,0.1)",
-              padding: "20px",
-              borderRadius: "12px",
-            }}
-          >
-            📄 Digital Signatures & Audit Logs
-          </div>
-        </div>
+```
+if (password !== confirmPassword) {
+  alert("Passwords do not match");
+  return;
+}
+
+setLoading(true);
+
+const response = await fetch(
+  "/api/register",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type":
+        "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+    }),
+  }
+);
+
+const data = await response.json();
+
+setLoading(false);
+
+if (!response.ok) {
+  alert(
+    data.error || "Registration failed"
+  );
+  return;
+}
+
+alert("Account created successfully");
+
+router.push("/login");
+```
+
+}
+
+return ( <div className="min-h-screen grid lg:grid-cols-2"> <div className="hidden lg:flex flex-col justify-center bg-gradient-to-br from-green-600 via-green-700 to-slate-900 text-white p-16"> <h1 className="text-6xl font-bold mb-6">
+Join SignFlow </h1>
+
+```
+    <p className="text-xl opacity-90 max-w-lg">
+      Create your account and
+      start signing documents
+      securely from anywhere.
+    </p>
+
+    <div className="mt-12 space-y-4">
+      <div className="bg-white/10 p-5 rounded-xl">
+        🚀 Unlimited Document
+        Uploads
       </div>
 
-      {/* Right Side */}
-      <div
-        style={{
-          background: "#f8fafc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "40px",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "450px",
-            background: "white",
-            padding: "40px",
-            borderRadius: "20px",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "34px",
-              fontWeight: "bold",
-              marginBottom: "10px",
-            }}
-          >
-            Create Account ✨
-          </h2>
+      <div className="bg-white/10 p-5 rounded-xl">
+        🔒 Secure Cloud Storage
+      </div>
 
-          <p
-            style={{
-              color: "#64748b",
-              marginBottom: "30px",
-            }}
-          >
-            Start your digital signing journey today.
-          </p>
-
-          <form>
-            <div style={{ marginBottom: "18px" }}>
-              <label>Full Name</label>
-
-              <input
-                type="text"
-                placeholder="John Doe"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  marginTop: "8px",
-                  border: "1px solid #cbd5e1",
-                  borderRadius: "10px",
-                }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "18px" }}>
-              <label>Email</label>
-
-              <input
-                type="email"
-                placeholder="you@example.com"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  marginTop: "8px",
-                  border: "1px solid #cbd5e1",
-                  borderRadius: "10px",
-                }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "18px" }}>
-              <label>Password</label>
-
-              <input
-                type="password"
-                placeholder="Minimum 8 characters"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  marginTop: "8px",
-                  border: "1px solid #cbd5e1",
-                  borderRadius: "10px",
-                }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "25px" }}>
-              <label>Confirm Password</label>
-
-              <input
-                type="password"
-                placeholder="Re-enter password"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  marginTop: "8px",
-                  border: "1px solid #cbd5e1",
-                  borderRadius: "10px",
-                }}
-              />
-            </div>
-
-            <button
-              type="submit"
-              style={{
-                width: "100%",
-                padding: "14px",
-                border: "none",
-                borderRadius: "10px",
-                background: "#16a34a",
-                color: "white",
-                fontWeight: "bold",
-                cursor: "pointer",
-                fontSize: "16px",
-              }}
-            >
-              Create Account
-            </button>
-          </form>
-
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: "20px",
-              color: "#64748b",
-            }}
-          >
-            Already have an account?{" "}
-            <a
-              href="/login"
-              style={{
-                color: "#16a34a",
-                fontWeight: "bold",
-                textDecoration: "none",
-              }}
-            >
-              Login
-            </a>
-          </p>
-        </div>
+      <div className="bg-white/10 p-5 rounded-xl">
+        📄 Digital Signatures &
+        Audit Logs
       </div>
     </div>
-  );
+  </div>
+
+  <div className="flex items-center justify-center bg-slate-50 p-8">
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+
+      <h2 className="text-3xl font-bold mb-2">
+        Create Account
+      </h2>
+
+      <p className="text-gray-500 mb-8">
+        Start your digital
+        signing journey today.
+      </p>
+
+      <form
+        onSubmit={handleRegister}
+        className="space-y-5"
+      >
+        <input
+          type="text"
+          placeholder="Full Name"
+          required
+          value={name}
+          onChange={(e) =>
+            setName(e.target.value)
+          }
+          className="w-full border rounded-xl p-3"
+        />
+
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
+          className="w-full border rounded-xl p-3"
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={(e) =>
+            setPassword(
+              e.target.value
+            )
+          }
+          className="w-full border rounded-xl p-3"
+        />
+
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          required
+          value={confirmPassword}
+          onChange={(e) =>
+            setConfirmPassword(
+              e.target.value
+            )
+          }
+          className="w-full border rounded-xl p-3"
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold"
+        >
+          {loading
+            ? "Creating..."
+            : "Create Account"}
+        </button>
+      </form>
+
+      <p className="text-center mt-6 text-gray-500">
+        Already have an account?
+        <a
+          href="/login"
+          className="text-green-600 font-semibold ml-2"
+        >
+          Login
+        </a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+);
 }
