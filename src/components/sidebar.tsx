@@ -4,12 +4,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Documents", href: "/documents" },
-  { name: "Upload", href: "/upload" },
-  { name: "Audit Logs", href: "/audit" },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
+  {
+    name: "Documents",
+    href: "/documents",
+  },
+  {
+    name: "Upload",
+    href: "/upload",
+  },
+  {
+    name: "Audit Logs",
+    href: "/audit",
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+  },
 ];
-
 export default function Sidebar() {
   const pathname = usePathname();
 
