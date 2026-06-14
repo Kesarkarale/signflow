@@ -24,6 +24,10 @@ const links = [
     name: "Settings",
     href: "/settings",
   },
+  {
+    name: "logout",
+    href: "/logout",
+  },
 ];
 
 export default function Sidebar() {
