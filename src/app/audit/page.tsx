@@ -10,32 +10,28 @@ export default async function AuditPage() {
 
   return (
     <div className="p-8">
-
-      <h1 className="text-3xl font-bold mb-8">
+      <h1 className="text-4xl font-bold mb-8">
         Audit Logs
       </h1>
 
-      <div className="space-y-3">
-
+      <div className="bg-white rounded-2xl border p-6">
         {logs.map((log) => (
           <div
             key={log.id}
-            className="bg-white border rounded-xl p-4"
+            className="border-b py-4"
           >
-            <div>
+            <div className="font-semibold">
               {log.action}
             </div>
 
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-slate-500">
               {new Date(
                 log.createdAt
               ).toLocaleString()}
             </div>
           </div>
         ))}
-
       </div>
-
     </div>
   );
 }
