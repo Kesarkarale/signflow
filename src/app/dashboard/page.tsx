@@ -58,11 +58,13 @@ return ( <div className="p-8 space-y-8">
     <DashboardStats
       title="Pending Documents"
       value={pendingDocs}
+      icon="⏳"
     />
 
     <DashboardStats
       title="Signed Documents"
       value={signedDocs}
+      icon="✅"
     />
 
     <DashboardStats
@@ -73,6 +75,7 @@ return ( <div className="p-8 space-y-8">
     <DashboardStats
       title="Audit Logs"
       value={auditCount}
+      icon="📋"
     />
 
     <DashboardStats
