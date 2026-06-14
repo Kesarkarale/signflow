@@ -25,12 +25,13 @@ const links = [
     href: "/settings",
   },
 ];
+
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
     <aside className="w-64 bg-slate-900 text-white min-h-screen p-6">
-      <h1 className="text-2xl font-bold mb-10">
+      <h1 className="text-3xl font-bold mb-10">
         SignFlow
       </h1>
 
@@ -39,22 +40,22 @@ export default function Sidebar() {
           <Link
             key={link.href}
             href={link.href}
-            className={`block px-4 py-3 rounded-xl ${
+            className={`block px-4 py-3 rounded-xl transition ${
               pathname === link.href
-                ? "bg-blue-600"
-                : "hover:bg-slate-800"
+                ? "bg-blue-600 text-white"
+                : "hover:bg-slate-800 text-slate-300"
             }`}
           >
             {link.name}
           </Link>
-      <Link
-       href="/settings"
-       className="block p-3 rounded-xl hover:bg-slate-800"
-           >
-  Settings
-</Link>
         ))}
       </nav>
+
+      <div className="mt-10 border-t border-slate-700 pt-6">
+        <button className="w-full bg-red-600 hover:bg-red-700 px-4 py-3 rounded-xl">
+          Logout
+        </button>
+      </div>
     </aside>
   );
 }
