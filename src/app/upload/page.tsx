@@ -1,44 +1,105 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function UploadPage() {
-  const [file, setFile] =
-    useState<File | null>(null);
+  const router = useRouter();
 
-  async function uploadPdf() {
-    if (!file) return;
+  const [title, setTitle] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const formData = new FormData();
+  async function handleSubmit(
+    e: React.FormEvent
+  ) {
+    e.preventDefault();
 
-    formData.append("file", file);
+    setLoading(true);
 
-    alert("Upload Started");
+    const res = await fetch(
+      "/api/documents/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          fileUrl,
+          ownerId: "TEMP_USER_ID",
+        }),
+      }
+    );
+
+    setLoading(false);
+
+    if (res.ok) {
+      router.push("/documents");
+    }
   }
 
   return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold mb-6">
-        Upload Document
-      </h1>
+    <div className="max-w-3xl mx-auto p-8">
+      <div className="bg-white rounded-3xl shadow border p-8">
+        <h1 className="text-4xl font-bold mb-2">
+          Upload Document
+        </h1>
 
-      <div className="bg-white p-8 rounded-2xl border">
-        <input
-          type="file"
-          accept="application/pdf"
-          onChange={(e) =>
-            setFile(
-              e.target.files?.[0] || null
-            )
-          }
-        />
+        <p className="text-slate-500 mb-8">
+          Upload a PDF document for
+          digital signing.
+        </p>
 
-        <button
-          onClick={uploadPdf}
-          className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl"
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6"
         >
-          Upload PDF
-        </button>
+          <div>
+            <label className="block mb-2 font-medium">
+              Document Title
+            </label>
+
+            <input
+              value={title}
+              onChange={(e) =>
+                setTitle(
+                  e.target.value
+                )
+              }
+              className="w-full border rounded-xl p-4"
+              placeholder="Employment Agreement"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">
+              PDF URL
+            </label>
+
+            <input
+              value={fileUrl}
+              onChange={(e) =>
+                setFileUrl(
+                  e.target.value
+                )
+              }
+              className="w-full border rounded-xl p-4"
+              placeholder="https://..."
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl"
+          >
+            {loading
+              ? "Uploading..."
+              : "Create Document"}
+          </button>
+        </form>
       </div>
     </div>
   );
