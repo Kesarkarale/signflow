@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import DashboardStats from "@/components/dashboardstats";
 
 export default async function DashboardPage() {
+
   const totalDocs =
     await prisma.document.count();
 
@@ -19,43 +19,38 @@ export default async function DashboardPage() {
       },
     });
 
-  const recentDocs =
-    await prisma.document.findMany({
-      take: 5,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
   return (
     <div>
+
       <h1 className="text-4xl font-bold mb-8">
         Dashboard
       </h1>
 
-      <DashboardStats
-        totalDocs={totalDocs}
-        pendingDocs={pendingDocs}
-        signedDocs={signedDocs}
-      />
+      <div className="grid md:grid-cols-3 gap-6">
 
-      <div className="mt-10 bg-white rounded-2xl border p-6">
-        <h2 className="text-xl font-semibold mb-4">
-          Recent Documents
-        </h2>
-
-        <div className="space-y-3">
-          {recentDocs.map((doc) => (
-            <div
-              key={doc.id}
-              className="flex justify-between border-b pb-3"
-            >
-              <span>{doc.title}</span>
-              <span>{doc.status}</span>
-            </div>
-          ))}
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <h3>Total Documents</h3>
+          <p className="text-4xl font-bold mt-3">
+            {totalDocs}
+          </p>
         </div>
+
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <h3>Pending</h3>
+          <p className="text-4xl font-bold mt-3 text-yellow-500">
+            {pendingDocs}
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <h3>Signed</h3>
+          <p className="text-4xl font-bold mt-3 text-green-600">
+            {signedDocs}
+          </p>
+        </div>
+
       </div>
+
     </div>
   );
 }
