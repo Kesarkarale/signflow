@@ -75,6 +75,11 @@ return ( <div className="p-8 space-y-8">
       value={auditCount}
     />
 
+    <DashboardStats
+  title="Signed Documents"
+  value={signedDocs}
+  icon="✅"
+/>
   </div>
 
   {/* Analytics */}
