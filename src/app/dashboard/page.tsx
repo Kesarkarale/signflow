@@ -78,7 +78,6 @@ return ( <div className="p-8 space-y-8">
     <DashboardStats
   title="Signed Documents"
   value={signedDocs}
-  icon="✅"
 />
   </div>
 
