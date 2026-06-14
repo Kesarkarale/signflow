@@ -7,14 +7,20 @@ export async function POST(req: Request) {
 
     const {
       documentId,
-      imageUrl,
+      signerId,
+      x,
+      y,
+      page,
     } = body;
 
     const signature =
       await prisma.signature.create({
         data: {
           documentId,
-          imageUrl,
+          signerId,
+          x,
+          y,
+          page,
         },
       });
 
@@ -35,6 +41,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(signature);
+
   } catch {
     return NextResponse.json(
       { error: "Failed" },
