@@ -47,6 +47,12 @@ export default function Sidebar() {
           >
             {link.name}
           </Link>
+      <Link
+       href="/settings"
+       className="block p-3 rounded-xl hover:bg-slate-800"
+           >
+  Settings
+</Link>
         ))}
       </nav>
     </aside>
