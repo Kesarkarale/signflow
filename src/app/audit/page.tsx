@@ -10,17 +10,19 @@ export default async function AuditPage() {
 
   return (
     <div className="p-8">
+
       <h1 className="text-4xl font-bold mb-8">
         Audit Logs
       </h1>
 
-      <div className="bg-white rounded-2xl border p-6">
+      <div className="bg-white rounded-3xl border">
+
         {logs.map((log) => (
           <div
             key={log.id}
-            className="border-b py-4"
+            className="p-4 border-b"
           >
-            <div className="font-semibold">
+            <div>
               {log.action}
             </div>
 
@@ -31,7 +33,9 @@ export default async function AuditPage() {
             </div>
           </div>
         ))}
+
       </div>
+
     </div>
   );
 }
