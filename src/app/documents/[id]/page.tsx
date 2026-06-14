@@ -1,15 +1,11 @@
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
-
-interface Props {
-  params: Promise<{
-    id: string;
-  }>;
-}
+import Link from "next/link";
 
 export default async function DocumentPage({
   params,
-}: Props) {
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
 
   const document =
@@ -20,50 +16,47 @@ export default async function DocumentPage({
     });
 
   if (!document) {
-    notFound();
+    return (
+      <div className="p-10">
+        Document not found
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-5xl mx-auto">
+    <div className="p-8">
 
-        <div className="bg-white rounded-2xl border p-8">
+      <div className="bg-white rounded-3xl p-8 border">
 
-          <h1 className="text-3xl font-bold mb-2">
-            {document.title}
-          </h1>
+        <h1 className="text-4xl font-bold">
+          {document.title}
+        </h1>
 
-          <p className="text-gray-500 mb-6">
-            Status: {document.status}
-          </p>
+        <p className="mt-4 text-slate-500">
+          Status: {document.status}
+        </p>
 
-          <div className="border rounded-xl p-6 bg-slate-50">
-            <p className="mb-2">
-              PDF URL
-            </p>
+        <div className="mt-8 flex gap-4">
 
-            <a
-              href={document.fileUrl}
-              target="_blank"
-              className="text-blue-600"
-            >
-              Open PDF
-            </a>
-          </div>
+          <a
+            href={document.fileUrl}
+            target="_blank"
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl"
+          >
+            Open PDF
+          </a>
 
-          <div className="mt-6 flex gap-4">
-            <button className="bg-green-600 text-white px-5 py-3 rounded-xl">
-              Sign Document
-            </button>
-
-            <button className="border px-5 py-3 rounded-xl">
-              Download
-            </button>
-          </div>
+          <Link
+            href={`/sign/${document.id}`}
+            className="bg-green-600 text-white px-6 py-3 rounded-xl"
+          >
+            Sign Document
+          </Link>
 
         </div>
 
       </div>
+
     </div>
   );
 }
