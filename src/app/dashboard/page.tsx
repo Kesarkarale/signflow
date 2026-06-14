@@ -27,6 +27,12 @@ export default async function DashboardPage() {
       createdAt: "desc",
     },
   });
+  const auditCount =
+  await prisma.auditLog.count();
+
+const signatureCount =
+  await prisma.signature.count();
+  
 
   return (
     <div className="p-8 space-y-8">
@@ -53,6 +59,15 @@ export default async function DashboardPage() {
           title="Signed Documents"
           value={signedDocs}
         />
+        <DashboardStats
+          title="Signatures"
+          value={signatureCount}
+        />
+
+         <DashboardStats
+           title="Audit Logs"
+           value={auditCount}
+       />
 
       </div>
 
