@@ -32,8 +32,15 @@ export default async function DashboardPage() {
 
 const signatureCount =
   await prisma.signature.count();
-  
 
+  const recentActivity =
+  await prisma.auditLog.findMany({
+    take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  
   return (
     <div className="p-8 space-y-8">
 
@@ -83,9 +90,7 @@ const signatureCount =
 
       </div>
 
-      {/* Activity Feed */}
-
-      <ActivityFeed />
+       
 
       {/* Recent Documents */}
 
