@@ -186,7 +186,7 @@ return ( <div className="p-8 space-y-8">
                 doc.status === "SIGNED"
                   ? "bg-green-100 text-green-700"
                   : "bg-yellow-100 text-yellow-700"
-              }}
+              }`}
             >
               {doc.status}
             </span>
