@@ -1,152 +1,218 @@
- "use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 import {
-  LayoutDashboard,
-  FileText,
-  Upload,
-  ShieldCheck,
-  Settings,
-  LogOut,
+LayoutDashboard,
+FileText,
+Upload,
+ShieldCheck,
+Settings,
+LogOut,
+Sparkles,
 } from "lucide-react";
 
 const links = [
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    name: "Documents",
-    href: "/documents",
-    icon: FileText,
-  },
-  {
-    name: "Upload",
-    href: "/upload",
-    icon: Upload,
-  },
-  {
-    name: "Audit Logs",
-    href: "/audit",
-    icon: ShieldCheck,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
+{
+name: "Dashboard",
+href: "/dashboard",
+icon: LayoutDashboard,
+},
+{
+name: "Documents",
+href: "/documents",
+icon: FileText,
+},
+{
+name: "Upload",
+href: "/upload",
+icon: Upload,
+},
+{
+name: "Audit Logs",
+href: "/audit",
+icon: ShieldCheck,
+},
+{
+name: "Settings",
+href: "/settings",
+icon: Settings,
+},
 ];
 
 export default function Sidebar() {
-  const pathname = usePathname();
+const pathname = usePathname();
 
-  return (
-    <aside className="w-72 bg-slate-950 text-white min-h-screen flex flex-col">
+return ( <aside className="
+   w-72
+   min-h-screen
+   bg-slate-950
+   text-white
+   flex
+   flex-col
+   border-r
+   border-slate-800
+ ">
+ 
+  <div className="p-8 border-b border-slate-800">
 
-      {/* Logo */}
+    <div className="flex items-center gap-3">
 
-      <div className="p-8 border-b border-slate-800">
-        <h1 className="text-3xl font-bold">
+      <div className="
+        h-12
+        w-12
+        rounded-2xl
+        bg-gradient-to-r
+        from-blue-500
+        to-indigo-600
+        flex
+        items-center
+        justify-center
+        shadow-lg
+      ">
+        <Sparkles size={22} />
+      </div>
+
+      <div>
+        <h1 className="text-2xl font-bold">
           SignFlow
         </h1>
 
-        <p className="text-slate-400 text-sm mt-2">
-          E-Signature Platform
+        <p className="text-slate-400 text-sm">
+          Professional E-Sign
         </p>
       </div>
 
-      {/* User */}
+    </div>
 
-      <div className="p-6 border-b border-slate-800">
+  </div>
 
-        <div className="flex items-center gap-3">
+  <div className="p-6 border-b border-slate-800">
 
-          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-bold text-lg">
-            K
-          </div>
+    <div className="flex items-center gap-4">
 
-          <div>
-            <h3 className="font-semibold">
-              Kesar Karale
-            </h3>
+      <div className="
+        relative
+        h-14
+        w-14
+        rounded-full
+        bg-gradient-to-r
+        from-blue-500
+        to-indigo-600
+        flex
+        items-center
+        justify-center
+        text-lg
+        font-bold
+      ">
+        K
 
-            <p className="text-slate-400 text-sm">
-              Admin
-            </p>
-          </div>
-
-        </div>
-
+        <span className="
+          absolute
+          bottom-0
+          right-0
+          h-4
+          w-4
+          rounded-full
+          bg-green-500
+          border-2
+          border-slate-950
+        " />
       </div>
 
-      {/* Navigation */}
+      <div>
+        <h3 className="font-semibold">
+          Kesar Karale
+        </h3>
 
-      <nav className="flex-1 p-5 space-y-2">
+        <p className="text-slate-400 text-sm">
+          Administrator
+        </p>
+      </div>
 
-        {links.map((link) => {
-          const Icon = link.icon;
+    </div>
 
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`
-                flex
-                items-center
-                gap-3
-                px-4
-                py-3
-                rounded-xl
-                transition-all
-                ${
-                  pathname === link.href
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-300 hover:bg-slate-800"
-                }
-              `}
-            >
-              <Icon size={20} />
+    <div className="
+      mt-4
+      bg-blue-600/15
+      border
+      border-blue-500/30
+      rounded-xl
+      p-3
+    ">
+      <p className="text-sm text-blue-300">
+        ⭐ Pro Workspace
+      </p>
+    </div>
 
-              <span>
-                {link.name}
-              </span>
-            </Link>
-          );
-        })}
+  </div>
 
-      </nav>
+  <nav className="flex-1 p-5 space-y-2">
 
-      {/* Footer */}
+    {links.map((link) => {
+      const Icon = link.icon;
+      const active =
+        pathname === link.href;
 
-      <div className="p-5 border-t border-slate-800">
-
-        <button
-          onClick={() => signOut()}
-          className="
-            w-full
+      return (
+        <Link
+          key={link.href}
+          href={link.href}
+          className={`
+            group
             flex
             items-center
-            justify-center
-            gap-2
-            bg-red-600
-            hover:bg-red-700
+            gap-3
             px-4
             py-3
-            rounded-xl
-            transition
-          "
+            rounded-2xl
+            transition-all
+            duration-200
+            ${
+              active
+                ? "bg-blue-600 text-white shadow-lg"
+                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+            }
+          `}
         >
-          <LogOut size={18} />
+          <Icon size={20} />
 
-          Logout
-        </button>
+          <span className="font-medium">
+            {link.name}
+          </span>
+        </Link>
+      );
+    })}
 
-      </div>
+  </nav>
 
-    </aside>
-  );
+  <div className="p-5 border-t border-slate-800">
+
+    <button
+      onClick={() => signOut()}
+      className="
+        w-full
+        flex
+        items-center
+        justify-center
+        gap-2
+        bg-red-600
+        hover:bg-red-700
+        py-3
+        rounded-2xl
+        font-medium
+        transition-all
+      "
+    >
+      <LogOut size={18} />
+
+      Logout
+    </button>
+
+  </div>
+
+</aside>
+);
 }
