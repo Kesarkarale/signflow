@@ -2,17 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
 const router = useRouter();
 
 const [name, setName] = useState("");
 const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [confirmPassword, setConfirmPassword] =
+const [password, setPassword] =
 useState("");
+const [confirmPassword,
+setConfirmPassword] = useState("");
 
-const [loading, setLoading] = useState(false);
+const [loading, setLoading] =
+useState(false);
 
 async function handleRegister(
 e: React.FormEvent<HTMLFormElement>
@@ -48,19 +51,27 @@ setLoading(false);
 
 if (!response.ok) {
   alert(
-    data.error || "Registration failed"
+    data.error ||
+      "Registration failed"
   );
   return;
 }
 
-alert("Account created successfully");
+alert(
+  "Account created successfully"
+);
 
 router.push("/login");
 
 }
 
-return ( <div className="min-h-screen grid lg:grid-cols-2"> <div className="hidden lg:flex flex-col justify-center bg-gradient-to-br from-green-600 via-green-700 to-slate-900 text-white p-16"> <h1 className="text-6xl font-bold mb-6">
-Join SignFlow </h1>
+return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
+
+  <div className="hidden lg:flex flex-col justify-center p-16 bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-900 text-white">
+
+    <h1 className="text-6xl font-bold mb-6">
+      Join SignFlow
+    </h1>
 
     <p className="text-xl opacity-90 max-w-lg">
       Create your account and
@@ -69,30 +80,33 @@ Join SignFlow </h1>
     </p>
 
     <div className="mt-12 space-y-4">
-      <div className="bg-white/10 p-5 rounded-xl">
+
+      <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl">
         🚀 Unlimited Document
         Uploads
       </div>
 
-      <div className="bg-white/10 p-5 rounded-xl">
+      <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl">
         🔒 Secure Cloud Storage
       </div>
 
-      <div className="bg-white/10 p-5 rounded-xl">
+      <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl">
         📄 Digital Signatures &
         Audit Logs
       </div>
+
     </div>
   </div>
 
-  <div className="flex items-center justify-center bg-slate-50 p-8">
-    <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+  <div className="flex items-center justify-center p-6">
 
-      <h2 className="text-3xl font-bold mb-2">
+    <div className="w-full max-w-md bg-white dark:bg-slate-900 border rounded-3xl shadow-2xl p-8">
+
+      <h2 className="text-4xl font-bold mb-2">
         Create Account
       </h2>
 
-      <p className="text-gray-500 mb-8">
+      <p className="text-slate-500 mb-8">
         Start your digital
         signing journey today.
       </p>
@@ -101,6 +115,7 @@ Join SignFlow </h1>
         onSubmit={handleRegister}
         className="space-y-5"
       >
+
         <input
           type="text"
           placeholder="Full Name"
@@ -109,7 +124,7 @@ Join SignFlow </h1>
           onChange={(e) =>
             setName(e.target.value)
           }
-          className="w-full border rounded-xl p-3"
+          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         />
 
         <input
@@ -120,7 +135,7 @@ Join SignFlow </h1>
           onChange={(e) =>
             setEmail(e.target.value)
           }
-          className="w-full border rounded-xl p-3"
+          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         />
 
         <input
@@ -133,7 +148,7 @@ Join SignFlow </h1>
               e.target.value
             )
           }
-          className="w-full border rounded-xl p-3"
+          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         />
 
         <input
@@ -146,33 +161,40 @@ Join SignFlow </h1>
               e.target.value
             )
           }
-          className="w-full border rounded-xl p-3"
+          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold"
         >
           {loading
             ? "Creating..."
             : "Create Account"}
         </button>
+
       </form>
 
-      <p className="text-center mt-6 text-gray-500">
-        Already have an account?
-        <a
+      <div className="text-center mt-6">
+
+        <p className="text-slate-500">
+          Already have an account?
+        </p>
+
+        <Link
           href="/login"
-          className="text-green-600 font-semibold ml-2"
+          className="text-blue-600 font-semibold"
         >
-          Login
-        </a>
-      </p>
+          Sign In
+        </Link>
+
+      </div>
 
     </div>
-  </div>
-</div>
 
+  </div>
+
+</div>
 );
 }
