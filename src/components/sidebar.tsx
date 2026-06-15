@@ -1,8 +1,9 @@
-"use client";
+ "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import ThemeToggle from "./theme-toggle";
 
 import {
 LayoutDashboard,
@@ -45,55 +46,72 @@ icon: Settings,
 export default function Sidebar() {
 const pathname = usePathname();
 
-return ( <aside className="
+return ( <aside
+   className="
    w-72
    min-h-screen
-   bg-slate-950
-   text-white
+   bg-white
+   dark:bg-slate-950
+   text-slate-900
+   dark:text-white
    flex
    flex-col
    border-r
-   border-slate-800
- ">
- 
-  <div className="p-8 border-b border-slate-800">
+   border-slate-200
+   dark:border-slate-800
+ "
+ >
+{/* Logo */}
 
-    <div className="flex items-center gap-3">
+  <div className="p-8 border-b border-slate-200 dark:border-slate-800">
 
-      <div className="
-        h-12
-        w-12
-        rounded-2xl
-        bg-gradient-to-r
-        from-blue-500
-        to-indigo-600
-        flex
-        items-center
-        justify-center
-        shadow-lg
-      ">
-        <Sparkles size={22} />
+    <div className="flex items-center justify-between">
+
+      <div className="flex items-center gap-3">
+
+        <div
+          className="
+          h-12
+          w-12
+          rounded-2xl
+          bg-gradient-to-r
+          from-blue-500
+          to-indigo-600
+          flex
+          items-center
+          justify-center
+          shadow-lg
+        "
+        >
+          <Sparkles size={22} />
+        </div>
+
+        <div>
+          <h1 className="text-2xl font-bold">
+            SignFlow
+          </h1>
+
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            Professional E-Sign
+          </p>
+        </div>
+
       </div>
 
-      <div>
-        <h1 className="text-2xl font-bold">
-          SignFlow
-        </h1>
-
-        <p className="text-slate-400 text-sm">
-          Professional E-Sign
-        </p>
-      </div>
+      <ThemeToggle />
 
     </div>
 
   </div>
 
-  <div className="p-6 border-b border-slate-800">
+  {/* User Profile */}
+
+  <div className="p-6 border-b border-slate-200 dark:border-slate-800">
 
     <div className="flex items-center gap-4">
 
-      <div className="
+      <div
+        className="
         relative
         h-14
         w-14
@@ -106,10 +124,13 @@ return ( <aside className="
         justify-center
         text-lg
         font-bold
-      ">
+        text-white
+      "
+      >
         K
 
-        <span className="
+        <span
+          className="
           absolute
           bottom-0
           right-0
@@ -118,8 +139,10 @@ return ( <aside className="
           rounded-full
           bg-green-500
           border-2
-          border-slate-950
-        " />
+          border-white
+          dark:border-slate-950
+        "
+        />
       </div>
 
       <div>
@@ -127,32 +150,37 @@ return ( <aside className="
           Kesar Karale
         </h3>
 
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-500 dark:text-slate-400 text-sm">
           Administrator
         </p>
       </div>
 
     </div>
 
-    <div className="
+    <div
+      className="
       mt-4
-      bg-blue-600/15
+      bg-blue-600/10
       border
-      border-blue-500/30
+      border-blue-500/20
       rounded-xl
       p-3
-    ">
-      <p className="text-sm text-blue-300">
+    "
+    >
+      <p className="text-sm text-blue-600 dark:text-blue-300">
         ⭐ Pro Workspace
       </p>
     </div>
 
   </div>
 
+  {/* Navigation */}
+
   <nav className="flex-1 p-5 space-y-2">
 
     {links.map((link) => {
       const Icon = link.icon;
+
       const active =
         pathname === link.href;
 
@@ -161,7 +189,6 @@ return ( <aside className="
           key={link.href}
           href={link.href}
           className={`
-            group
             flex
             items-center
             gap-3
@@ -170,10 +197,18 @@ return ( <aside className="
             rounded-2xl
             transition-all
             duration-200
+
             ${
               active
                 ? "bg-blue-600 text-white shadow-lg"
-                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                : `
+                  text-slate-600
+                  dark:text-slate-300
+                  hover:bg-slate-100
+                  dark:hover:bg-slate-800
+                  hover:text-slate-900
+                  dark:hover:text-white
+                `
             }
           `}
         >
@@ -182,13 +217,16 @@ return ( <aside className="
           <span className="font-medium">
             {link.name}
           </span>
+
         </Link>
       );
     })}
 
   </nav>
 
-  <div className="p-5 border-t border-slate-800">
+  {/* Logout */}
+
+  <div className="p-5 border-t border-slate-200 dark:border-slate-800">
 
     <button
       onClick={() => signOut()}
@@ -200,6 +238,7 @@ return ( <aside className="
         gap-2
         bg-red-600
         hover:bg-red-700
+        text-white
         py-3
         rounded-2xl
         font-medium
