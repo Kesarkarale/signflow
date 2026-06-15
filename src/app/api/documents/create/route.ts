@@ -12,7 +12,6 @@ export async function POST(req: Request) {
         fileUrl: body.fileUrl,
         ownerId: body.ownerId,
         
-        signToken: randomUUID(),
       },
     });
 
