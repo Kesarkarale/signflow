@@ -10,22 +10,20 @@ export default function DashboardStats({
   icon,
 }: Props) {
   return (
-    <div className="bg-white rounded-3xl p-6 shadow-sm border">
+    <div className="bg-white rounded-3xl border p-6 shadow-sm hover:shadow-lg transition">
       <div className="flex items-center justify-between">
-        <h3 className="text-slate-500">
+        <h3 className="text-slate-500 text-sm">
           {title}
         </h3>
 
-        {icon && (
-          <span className="text-2xl">
-            {icon}
-          </span>
-        )}
+        <span className="text-2xl">
+          {icon}
+        </span>
       </div>
 
-      <p className="text-4xl font-bold mt-4">
+      <h2 className="text-4xl font-bold mt-4">
         {value}
-      </p>
+      </h2>
     </div>
   );
 }
