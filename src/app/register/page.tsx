@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function RegisterPage() {
 const router = useRouter();
@@ -13,6 +14,13 @@ const [password, setPassword] =
 useState("");
 const [confirmPassword,
 setConfirmPassword] = useState("");
+
+const [showPassword,
+setShowPassword] = useState(false);
+
+const [showConfirmPassword,
+setShowConfirmPassword] =
+useState(false);
 
 const [loading, setLoading] =
 useState(false);
@@ -45,7 +53,8 @@ const response = await fetch(
   }
 );
 
-const data = await response.json();
+const data =
+  await response.json();
 
 setLoading(false);
 
@@ -82,8 +91,7 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
     <div className="mt-12 space-y-4">
 
       <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl">
-        🚀 Unlimited Document
-        Uploads
+        🚀 Unlimited Document Uploads
       </div>
 
       <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl">
@@ -138,31 +146,79 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
           className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
-          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
-        />
+        <div className="relative">
 
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          required
-          value={confirmPassword}
-          onChange={(e) =>
-            setConfirmPassword(
-              e.target.value
-            )
-          }
-          className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
-        />
+          <input
+            type={
+              showPassword
+                ? "text"
+                : "password"
+            }
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(e) =>
+              setPassword(
+                e.target.value
+              )
+            }
+            className="w-full border rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowPassword(
+                !showPassword
+              )
+            }
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"
+          >
+            {showPassword ? (
+              <EyeOff size={20} />
+            ) : (
+              <Eye size={20} />
+            )}
+          </button>
+
+        </div>
+
+        <div className="relative">
+
+          <input
+            type={
+              showConfirmPassword
+                ? "text"
+                : "password"
+            }
+            placeholder="Confirm Password"
+            required
+            value={confirmPassword}
+            onChange={(e) =>
+              setConfirmPassword(
+                e.target.value
+              )
+            }
+            className="w-full border rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowConfirmPassword(
+                !showConfirmPassword
+              )
+            }
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"
+          >
+            {showConfirmPassword ? (
+              <EyeOff size={20} />
+            ) : (
+              <Eye size={20} />
+            )}
+          </button>
+
+        </div>
 
         <button
           type="submit"
@@ -198,3 +254,4 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
 </div>
 );
 }
+
