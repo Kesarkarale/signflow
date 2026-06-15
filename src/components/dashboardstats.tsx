@@ -1,29 +1,35 @@
 interface Props {
-  title: string;
-  value: number;
-  icon?: string;
+title: string;
+value: number;
 }
 
 export default function DashboardStats({
-  title,
-  value,
-  icon,
+title,
+value,
 }: Props) {
-  return (
-    <div className="bg-white rounded-3xl border p-6 shadow-sm hover:shadow-lg transition">
-      <div className="flex items-center justify-between">
-        <h3 className="text-slate-500 text-sm">
-          {title}
-        </h3>
+return ( <div
+   className="
+   bg-white
+   dark:bg-slate-900
+   border
+   dark:border-slate-800
+   rounded-3xl
+   p-6
+   shadow-sm
+   hover:shadow-xl
+   hover:-translate-y-1
+   transition-all
+   "
+ > <p className="text-slate-500 text-sm">
+{title} </p>
 
-        <span className="text-2xl">
-          {icon}
-        </span>
-      </div>
+  <h2 className="text-4xl font-bold mt-3">
+    {value}
+  </h2>
 
-      <h2 className="text-4xl font-bold mt-4">
-        {value}
-      </h2>
-    </div>
-  );
+  <p className="text-green-500 text-sm mt-4">
+    ↑ Active
+  </p>
+</div>
+);
 }
