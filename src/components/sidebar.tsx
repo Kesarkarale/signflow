@@ -4,6 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import ThemeToggle from "./theme-toggle";
+import { Bell } from "lucide-react";
+import { Bell } from "lucide-react";
+ 
 
 import {
 LayoutDashboard,
@@ -25,7 +28,12 @@ const links = [
 name: "Dashboard",
 href: "/dashboard",
 icon: LayoutDashboard,
-},
+}, 
+{
+  label: "Notifications",
+  href: "/notifications",
+  icon: Bell,
+}
 {
 name: "Documents",
 href: "/documents",
