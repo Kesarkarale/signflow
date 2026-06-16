@@ -7,24 +7,27 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { name, email, password } = body;
-if (!name || !email || !password) {
-  return NextResponse.json(
-    { error: "All fields are required" },
-    { status: 400 }
-  );
-}
 
-if (password.length < 6) {
-  return NextResponse.json(
-    { error: "Password must be at least 6 characters" },
-    { status: 400 }
-  );
-}
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    if (!name || !email || !password) {
+      return NextResponse.json(
+        { error: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+    if (password.length < 6) {
+      return NextResponse.json(
+        { error: "Password must be at least 6 characters" },
+        { status: 400 }
+      );
+    }
+
+    const existingUser =
+      await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
 
     if (existingUser) {
       return NextResponse.json(
@@ -33,12 +36,10 @@ if (password.length < 6) {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(
-      password,
-      10
-    );
+    const hashedPassword =
+      await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         name,
         email,
@@ -46,11 +47,12 @@ if (password.length < 6) {
       },
     });
 
-return NextResponse.json({
-  message: "User created successfully",
-});
-    
-   catch {
+    return NextResponse.json({
+      message:
+        "User created successfully",
+    });
+
+  } catch {
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
