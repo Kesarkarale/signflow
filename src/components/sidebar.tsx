@@ -16,6 +16,11 @@ Sparkles,
 } from "lucide-react";
 
 const links = [
+ {
+  label: "Profile",
+  href: "/dashboard/profile",
+  icon: User,
+}
 {
 name: "Dashboard",
 href: "/dashboard",
