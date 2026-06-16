@@ -63,7 +63,6 @@ return (
       </p>
 
       <div className="mt-6 flex gap-4">
- 
         <a
           href="/upload"
           className="bg-white text-slate-900 px-5 py-3 rounded-xl font-semibold"
