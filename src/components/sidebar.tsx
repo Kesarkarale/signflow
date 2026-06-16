@@ -23,7 +23,7 @@ const links = [
   label: "Profile",
   href: "/dashboard/profile",
   icon: User,
-}
+},
 {
 name: "Dashboard",
 href: "/dashboard",
@@ -33,7 +33,7 @@ icon: LayoutDashboard,
   label: "Notifications",
   href: "/notifications",
   icon: Bell,
-}
+},
 {
 name: "Documents",
 href: "/documents",
