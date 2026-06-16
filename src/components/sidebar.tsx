@@ -30,27 +30,27 @@ icon: LayoutDashboard,
 }, 
 {
   name: "Notifications",
-  href: "/dashboard/notifications",
+  href: "/app/notifications",
   icon: Bell,
 },
 {
 name: "Documents",
-href: "/dashboard/documents",
+href: "/app/documents",
 icon: FileText,
 },
 {
 name: "Upload",
-href: "/dashboard/upload",
+href: "/app/upload",
 icon: Upload,
 },
 {
 name: "Audit Logs",
-href: "/dashboard/audit",
+href: "/app/audit",
 icon: ShieldCheck,
 },
 {
 name: "Settings",
-href: "/dashboard/settings",
+href: "/app/settings",
 icon: Settings,
 },
 ];
