@@ -7,7 +7,19 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { name, email, password } = body;
+if (!name || !email || !password) {
+  return NextResponse.json(
+    { error: "All fields are required" },
+    { status: 400 }
+  );
+}
 
+if (password.length < 6) {
+  return NextResponse.json(
+    { error: "Password must be at least 6 characters" },
+    { status: 400 }
+  );
+}
     const existingUser = await prisma.user.findUnique({
       where: {
         email,
@@ -34,8 +46,11 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(user);
-  } catch {
+return NextResponse.json({
+  message: "User created successfully",
+});
+    
+   catch {
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
