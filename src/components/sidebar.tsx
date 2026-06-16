@@ -20,7 +20,7 @@ Sparkles,
 
 const links = [
  {
-  label: "Profile",
+  name: "Profile",
   href: "/dashboard/profile",
   icon: User,
 },
@@ -30,7 +30,7 @@ href: "/dashboard",
 icon: LayoutDashboard,
 }, 
 {
-  label: "Notifications",
+  name: "Notifications",
   href: "/notifications",
   icon: Bell,
 },
