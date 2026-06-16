@@ -1,55 +1,78 @@
 generator client {
-  provider = "prisma-client-js"
+provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+provider  = "postgresql"
+url       = env("DATABASE_URL")
+directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id         String      @id @default(cuid())
-  name       String?
-  email      String      @unique
-  password   String
-  createdAt  DateTime    @default(now())
-  documents  Document[]
-  signatures Signature[]
+id          String       @id @default(cuid())
+name        String?
+email       String       @unique
+password    String
+
+createdAt   DateTime     @default(now())
+updatedAt   DateTime     @updatedAt
+
+documents   Document[]
+signatures  Signature[]
 }
 
 model Document {
-  id         String      @id @default(cuid())
-  title      String
-  fileUrl    String
-  status     String      @default("PENDING")
-  ownerId    String
-  signToken  String?     @unique
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  auditLogs  AuditLog[]
-  owner      User        @relation(fields: [ownerId], references: [id])
-  signatures Signature[]
+id          String       @id @default(cuid())
+
+title       String
+fileUrl     String
+
+status      String       @default("PENDING")
+
+ownerId     String
+signToken   String?      @unique
+
+createdAt   DateTime     @default(now())
+updatedAt   DateTime     @updatedAt
+
+owner        User        @relation(fields: [ownerId], references: [id])
+
+signatures   Signature[]
+auditLogs    AuditLog[]
 }
 
 model Signature {
-  id         String   @id @default(cuid())
-  documentId String
-  signerId   String
-  x          Float
-  y          Float
-  page       Int
-  status     String   @default("PENDING")
-  createdAt  DateTime @default(now())
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  signer     User     @relation(fields: [signerId], references: [id])
+id           String      @id @default(cuid())
+
+documentId   String
+signerId     String
+
+imageUrl     String?
+
+x            Float       @default(0)
+y            Float       @default(0)
+
+page         Int         @default(1)
+
+status       String      @default("PENDING")
+
+createdAt    DateTime    @default(now())
+
+document     Document    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+signer       User        @relation(fields: [signerId], references: [id])
 }
 
 model AuditLog {
-  id         String   @id @default(cuid())
-  documentId String
-  action     String
-  ipAddress  String?
-  createdAt  DateTime @default(now())
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+id           String      @id @default(cuid())
+
+documentId   String
+
+action       String
+
+ipAddress    String?
+
+createdAt    DateTime    @default(now())
+
+document     Document    @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
