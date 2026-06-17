@@ -1,5 +1,7 @@
-import SignaturePad from "@/components/signature-canvas";
+ import SignaturePad from "@/components/signature-canvas";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
 
 export default async function SignPage({
   params,
@@ -7,6 +9,9 @@ export default async function SignPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+
+  const session =
+    await getServerSession(authConfig);
 
   const document =
     await prisma.document.findUnique({
@@ -48,7 +53,7 @@ export default async function SignPage({
 
           <SignaturePad
             documentId={document.id}
-            signerId="demo-user-id"
+            signerId={session?.user?.id || ""}
           />
         </div>
       </div>
