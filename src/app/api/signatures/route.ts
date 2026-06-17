@@ -8,19 +8,31 @@ export async function POST(req: Request) {
     const {
       documentId,
       signerId,
-      x,
-      y,
-      page,
+      signatureImage,
     } = body;
+
+    if (
+      !documentId ||
+      !signerId ||
+      !signatureImage
+    ) {
+      return NextResponse.json(
+        {
+          error: "Missing required fields",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
     const signature =
       await prisma.signature.create({
         data: {
           documentId,
           signerId,
-          x,
-          y,
-          page,
+          signatureImage,
+          status: "SIGNED",
         },
       });
 
@@ -35,17 +47,26 @@ export async function POST(req: Request) {
 
     await prisma.auditLog.create({
       data: {
-        action: "DOCUMENT_SIGNED",
         documentId,
+        action: "DOCUMENT_SIGNED",
       },
     });
 
-    return NextResponse.json(signature);
+    return NextResponse.json({
+      success: true,
+      signature,
+    });
 
-  } catch {
+  } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
-      { error: "Failed" },
-      { status: 500 }
+      {
+        error: "Failed to save signature",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
