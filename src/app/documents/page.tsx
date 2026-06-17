@@ -6,6 +6,7 @@ Clock3,
 CheckCircle2,
 Upload,
 } from "lucide-react";
+import PageWithSidebar from "@/components/PageWithSidebar";
 
 export default async function DocumentsPage() {
 const documents =
@@ -32,7 +33,9 @@ status: "PENDING",
 },
 });
 
-return ( <div className="p-8 space-y-8">
+return 
+    <PageWithSidebar>
+  ( <div className="p-8 space-y-8">
 
   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
@@ -289,5 +292,6 @@ return ( <div className="p-8 space-y-8">
   </div>
 
 </div>
+       </PageWithSidebar>
 );
 }
