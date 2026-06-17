@@ -5,6 +5,7 @@ import {
   PenTool,
   AlertCircle,
 } from "lucide-react";
+import PageWithSidebar from "@/components/PageWithSidebar";
 
 const notifications = [
   {
@@ -51,6 +52,7 @@ const notifications = [
 
 export default function NotificationsPage() {
   return (
+    <PageWithSidebar>
     <div className="p-8 space-y-8">
 
       {/* Hero */}
@@ -243,5 +245,6 @@ export default function NotificationsPage() {
       </div>
 
     </div>
+    </PageWithSidebar>
   );
 }
