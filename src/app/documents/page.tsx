@@ -33,9 +33,9 @@ status: "PENDING",
 },
 });
 
-return 
+return  (
     <PageWithSidebar>
-  ( <div className="p-8 space-y-8">
+  <div className="p-8 space-y-8">
 
   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
