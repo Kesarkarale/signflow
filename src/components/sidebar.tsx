@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import ThemeToggle from "./theme-toggle";
 import { Bell } from "lucide-react";
- 
+ import { FilePlus } from "lucide-react";
+
 import {
 User,
 LayoutDashboard,
@@ -32,6 +33,11 @@ icon: LayoutDashboard,
   name: "Notifications",
   href: "/notifications",
   icon: Bell,
+},
+ {
+  name: "Create PDF",
+  href: "/create-document",
+  icon: FilePlus,
 },
 {
 name: "Documents",
