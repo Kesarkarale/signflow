@@ -9,16 +9,15 @@ directUrl = env("DIRECT_URL")
 }
 
 model User {
-id          String       @id @default(cuid())
-name        String?
-email       String       @unique
-password    String
+  id         String      @id @default(cuid())
+  name       String?
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt @default(now())
 
-createdAt   DateTime     @default(now())
-updatedAt   DateTime     @updatedAt
-
-documents   Document[]
-signatures  Signature[]
+  documents  Document[]
+  signatures Signature[]
 }
 
 model Document {
