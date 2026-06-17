@@ -11,6 +11,7 @@ Trash2,
 Moon,
 CheckCircle2,
 } from "lucide-react";
+import PageWithSidebar from "@/components/PageWithSidebar";
 
 export default function SettingsPage() {
 const [name, setName] =
@@ -19,7 +20,9 @@ useState("Kesar Karale");
 const [email, setEmail] =
 useState("[kesar@example.com](mailto:kesar@example.com)");
 
-return ( <div className="p-8 space-y-8">
+return ( 
+  <PageWithSidebar>
+  <div className="p-8 space-y-8">
 
   {/* Hero */}
 
@@ -362,5 +365,6 @@ return ( <div className="p-8 space-y-8">
   </div>
 
 </div>
+    </PageWithSidebar>
 );
 }
