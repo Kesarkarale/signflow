@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import PageWithSidebar from "@/components/PageWithSidebar";
 
 export default async function AuditPage() {
 const logs =
@@ -10,7 +11,9 @@ createdAt: "desc",
 
 const totalLogs = logs.length;
 
-return ( <div className="p-8 space-y-8">
+return ( 
+  <PageWithSidebar> 
+  <div className="p-8 space-y-8">
 
   {/* Hero */}
 
@@ -192,5 +195,6 @@ return ( <div className="p-8 space-y-8">
   </div>
 
 </div>
+    </PageWithSidebar>
 );
 }
