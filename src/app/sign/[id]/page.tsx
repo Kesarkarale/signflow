@@ -25,15 +25,12 @@ export default async function SignPage({
 
   return (
     <div className="p-8">
-
       <h1 className="text-4xl font-bold mb-8">
         Sign Document
       </h1>
 
       <div className="grid lg:grid-cols-2 gap-8">
-
         <div className="bg-white border rounded-2xl p-6">
-
           <h2 className="font-bold mb-4">
             PDF Preview
           </h2>
@@ -42,21 +39,19 @@ export default async function SignPage({
             src={document.fileUrl}
             className="w-full h-[700px] rounded-xl border"
           />
-
         </div>
 
         <div className="bg-white border rounded-2xl p-6">
-
           <h2 className="font-bold mb-4">
             Draw Signature
           </h2>
 
-          <SignaturePad />
-
+          <SignaturePad
+            documentId={document.id}
+            signerId="demo-user-id"
+          />
         </div>
-
       </div>
-
     </div>
   );
 }
