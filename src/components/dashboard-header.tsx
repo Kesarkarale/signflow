@@ -101,7 +101,18 @@ return ( <div
       <Upload size={18} />
       Upload PDF
     </Link>
-
+<Link
+  href="/create-document"
+  className="
+  bg-purple-600
+  text-white
+  px-4
+  py-2
+  rounded-xl
+"
+>
+  Create PDF
+</Link>
   </div>
 
 </div>
