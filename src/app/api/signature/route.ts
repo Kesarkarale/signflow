@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -20,9 +20,7 @@ export async function POST(req: Request) {
         {
           error: "Missing required fields",
         },
-        {
-          status: 400,
-        }
+        { status: 400 }
       );
     }
 
@@ -58,7 +56,7 @@ export async function POST(req: Request) {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Signature Save Error:", error);
 
     return NextResponse.json(
       {
