@@ -11,6 +11,7 @@ CheckCircle2,
 Shield,
 FileCheck,
 } from "lucide-react";
+import PageWithSidebar from "@/components/PageWithSidebar";
 
 export default function UploadPage() {
 const router = useRouter();
@@ -59,7 +60,9 @@ setLoading(false);
 
 }
 
-return ( <div className="p-8">
+return (
+  <PageWithSidebar>
+  <div className="p-8">
 
   <div className="max-w-7xl mx-auto space-y-8">
 
@@ -426,6 +429,6 @@ return ( <div className="p-8">
   </div>
 
 </div>
-
+  </PageWithSidebar> 
 );
 }
