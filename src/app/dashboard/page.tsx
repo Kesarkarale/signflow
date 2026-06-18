@@ -12,7 +12,6 @@ export default async function DashboardPage() {
   if (!session) {
     redirect("/login");
   }
-export default async function DashboardPage() {
  
  const totalDocs =
   await prisma.document.count();
