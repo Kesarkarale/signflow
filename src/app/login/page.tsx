@@ -66,7 +66,12 @@ export default function LoginPage() {
 
       {/* LEFT */}
       <div className="hidden lg:flex flex-col justify-center p-16 bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-900 text-white">
-
+<Image
+  src="/logo.png"
+  alt="SignFlow"
+  width={70}
+  height={70}
+/>
         <h1 className="text-6xl font-bold mb-6">
           SignFlow
         </h1>
