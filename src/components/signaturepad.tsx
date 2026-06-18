@@ -54,11 +54,7 @@ export default function SignaturePad({
             "Content-Type":
               "application/json",
           },
-          body: JSON.stringify({
-            documentId,
-            signerId,
-            signatureImage: data,
-          }),
+         imageUrl: data
         }
       );
 
