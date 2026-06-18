@@ -1,22 +1,18 @@
 import "./globals.css";
 import Providers from "./providers";
+
 export const metadata = {
   title: "SignFlow",
-  description: "Digital Signature Platform",
+  description: "Professional E-Signature Platform",
   icons: {
     icon: "/favicon.png",
   },
 };
-export const metadata = {
-title: "SignFlow",
-description:
-"Professional E-Signature Platform",
-};
 
 export default function RootLayout({
-children,
+  children,
 }: {
-children: React.ReactNode;
+  children: React.ReactNode;
 }) {
 return ( <html
    lang="en"
