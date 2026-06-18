@@ -32,10 +32,8 @@ if (result?.error) {
   return;
 }
 
-alert("Login Success");
-if (result?.ok) {
-  window.location.href = "/dashboard";
-}
+alert("Login Success"); 
+window.location.href = "/dashboard";
   }
 
   return (
