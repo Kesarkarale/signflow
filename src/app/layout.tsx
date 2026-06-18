@@ -1,6 +1,12 @@
 import "./globals.css";
 import Providers from "./providers";
-
+export const metadata = {
+  title: "SignFlow",
+  description: "Digital Signature Platform",
+  icons: {
+    icon: "/favicon.png",
+  },
+};
 export const metadata = {
 title: "SignFlow",
 description:
