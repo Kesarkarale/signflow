@@ -200,23 +200,25 @@ return ( <div className="p-8 space-y-8">
 
         <div className="space-y-3">
 
-          <a
-            href={document.fileUrl}
-            target="_blank"
-            className="
-              block
-              w-full
-              text-center
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              py-3
-              rounded-2xl
-              font-semibold
-            "
-          >
-            Open PDF
-          </a>
+          {document.fileUrl && (
+  <a
+    href={document.fileUrl}
+    target="_blank"
+    className="
+      block
+      w-full
+      text-center
+      bg-blue-600
+      hover:bg-blue-700
+      text-white
+      py-3
+      rounded-2xl
+      font-semibold
+    "
+  >
+    Open PDF
+  </a>
+)}
 
           <Link
             href={`/sign/${document.id}`}
