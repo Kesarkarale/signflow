@@ -1,14 +1,15 @@
 generator client {
-provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-provider  = "postgresql"
-url       = env("DATABASE_URL")
-directUrl = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
+<<<<<<< HEAD
   id         String      @id @default(cuid())
   name       String?
   email      String      @unique
@@ -16,11 +17,22 @@ model User {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt @default(now())
 
+=======
+  id       String  @id @default(cuid())
+  name     String?
+  email    String  @unique
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+>>>>>>> 57ab464 (install @prisma/client)
   documents  Document[]
   signatures Signature[]
 }
 
 model Document {
+<<<<<<< HEAD
   id          String       @id @default(cuid())
 
   title       String
@@ -40,13 +52,36 @@ model Document {
 
   signatures   Signature[]
   auditLogs    AuditLog[]
+=======
+  id String @id @default(cuid())
+
+  title   String
+  fileUrl String
+
+  status String @default("PENDING")
+
+  ownerId   String
+  signToken String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner User @relation(fields: [ownerId], references: [id])
+
+  signatures Signature[]
+  auditLogs  AuditLog[]
+>>>>>>> 57ab464 (install @prisma/client)
 }
 
 model Signature {
   id String @id @default(cuid())
 
   documentId String
+<<<<<<< HEAD
   signerId String
+=======
+  signerId   String
+>>>>>>> 57ab464 (install @prisma/client)
 
   imageUrl String?
 
@@ -56,19 +91,28 @@ model Signature {
   page Int @default(1)
 
   status String @default("PENDING")
+<<<<<<< HEAD
+=======
+
+  createdAt DateTime @default(now())
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  signer User @relation(fields: [signerId], references: [id])
+>>>>>>> 57ab464 (install @prisma/client)
 }
 
 
 model AuditLog {
-id           String      @id @default(cuid())
+  id String @id @default(cuid())
 
-documentId   String
+  documentId String
 
-action       String
+  action String
 
-ipAddress    String?
+  ipAddress String?
 
-createdAt    DateTime    @default(now())
+  createdAt DateTime @default(now())
 
-document     Document    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
