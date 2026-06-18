@@ -9,77 +9,45 @@ datasource db {
 }
 
 model User {
-<<<<<<< HEAD
-  id         String      @id @default(cuid())
-  name       String?
-  email      String      @unique
-  password   String
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt @default(now())
-
-=======
-  id       String  @id @default(cuid())
-  name     String?
-  email    String  @unique
-  password String
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
->>>>>>> 57ab464 (install @prisma/client)
   documents  Document[]
   signatures Signature[]
 }
 
 model Document {
-<<<<<<< HEAD
-  id          String       @id @default(cuid())
+  id        String   @id @default(cuid())
 
-  title       String
-  content     String?      @db.Text
+  title     String
+  content   String?  @db.Text
+  fileUrl   String?
 
-  fileUrl     String?
-
-  status      String       @default("PENDING")
-
-  ownerId     String
-  signToken   String?      @unique
-
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-
-  owner        User        @relation(fields: [ownerId], references: [id])
-
-  signatures   Signature[]
-  auditLogs    AuditLog[]
-=======
-  id String @id @default(cuid())
-
-  title   String
-  fileUrl String
-
-  status String @default("PENDING")
+  status    String   @default("PENDING")
 
   ownerId   String
-  signToken String? @unique
+  signToken String?  @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  owner User @relation(fields: [ownerId], references: [id])
-
+  owner      User       @relation(fields: [ownerId], references: [id])
   signatures Signature[]
   auditLogs  AuditLog[]
->>>>>>> 57ab464 (install @prisma/client)
 }
 
 model Signature {
   id             String   @id @default(cuid())
+
   documentId     String
   signerId       String
 
   signatureImage String   @db.Text
-
   status         String   @default("SIGNED")
 
   createdAt      DateTime @default(now())
@@ -88,17 +56,14 @@ model Signature {
   signer         User     @relation(fields: [signerId], references: [id])
 }
 
-
 model AuditLog {
-  id String @id @default(cuid())
+  id         String   @id @default(cuid())
 
   documentId String
+  action     String
+  ipAddress  String?
 
-  action String
+  createdAt  DateTime @default(now())
 
-  ipAddress String?
-
-  createdAt DateTime @default(now())
-
-  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
