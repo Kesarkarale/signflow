@@ -1,7 +1,7 @@
 "use client";
 
 import SignatureCanvas from "react-signature-canvas";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Eraser,
   Save,
@@ -19,7 +19,12 @@ export default function SignaturePad({
   signerId,
 }: SignaturePadProps) {
   const sigRef =
-    useRef<SignatureCanvas | null>(null);
+    useRef<SignatureCanvas | null>(
+      null
+    );
+
+  const [loading, setLoading] =
+    useState(false);
 
   const clearSignature = () => {
     sigRef.current?.clear();
@@ -29,61 +34,62 @@ export default function SignaturePad({
     sigRef.current?.clear();
   };
 
- const saveSignature = async () => {
-  if (
-    !sigRef.current ||
-    sigRef.current.isEmpty()
-  ) {
-    alert("Please draw your signature first.");
-    return;
-  }
-
-  const data =
-    sigRef.current
-      .getTrimmedCanvas()
-      .toDataURL("image/png");
-
-  try {
-    const res = await fetch(
-      "/api/signature",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: JSON.stringify({
-          documentId,
-          signerId,
-          imageUrl: data,
-          x: 0,
-          y: 0,
-          page: 1,
-        }),
+  const saveSignature =
+    async () => {
+      if (
+        !sigRef.current ||
+        sigRef.current.isEmpty()
+      ) {
+        alert(
+          "Please draw your signature first."
+        );
+        return;
       }
-    );
 
-    const result =
-      await res.json();
+      setLoading(true);
 
-    if (!res.ok) {
-      throw new Error(
-        result.error
-      );
-    }
+      try {
+        const data =
+          sigRef.current
+            .getTrimmedCanvas()
+            .toDataURL(
+              "image/png"
+            );
 
-    alert(
-      "Signature saved successfully!"
-    );
+        const res = await fetch(
+          "/api/signature",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              documentId,
+              signerId,
+              signatureImage:
+                data,
+            }),
+          }
+        );
 
-  } catch (error) {
-    console.error(error);
+        if (!res.ok) {
+          throw new Error();
+        }
 
-    alert(
-      "Failed to save signature"
-    );
-  }
-};
+        alert(
+          "Signature saved successfully!"
+        );
+
+        window.location.reload();
+      } catch {
+        alert(
+          "Failed to save signature"
+        );
+      }
+
+      setLoading(false);
+    };
 
   return (
     <div
@@ -121,8 +127,8 @@ export default function SignaturePad({
           </h2>
 
           <p className="text-slate-500 text-sm">
-            Sign naturally using your mouse
-            or touch device.
+            Sign using mouse
+            or touch.
           </p>
         </div>
       </div>
@@ -132,7 +138,6 @@ export default function SignaturePad({
         border-2
         border-dashed
         border-slate-300
-        dark:border-slate-700
         rounded-2xl
         overflow-hidden
         bg-white
@@ -150,15 +155,16 @@ export default function SignaturePad({
         />
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex gap-3 flex-wrap">
         <button
-          onClick={clearSignature}
+          onClick={
+            clearSignature
+          }
           className="
           flex
           items-center
           gap-2
           bg-red-500
-          hover:bg-red-600
           text-white
           px-5
           py-3
@@ -170,13 +176,14 @@ export default function SignaturePad({
         </button>
 
         <button
-          onClick={resetSignature}
+          onClick={
+            resetSignature
+          }
           className="
           flex
           items-center
           gap-2
           bg-amber-500
-          hover:bg-amber-600
           text-white
           px-5
           py-3
@@ -188,13 +195,15 @@ export default function SignaturePad({
         </button>
 
         <button
-          onClick={saveSignature}
+          onClick={
+            saveSignature
+          }
+          disabled={loading}
           className="
           flex
           items-center
           gap-2
           bg-green-600
-          hover:bg-green-700
           text-white
           px-5
           py-3
@@ -202,7 +211,10 @@ export default function SignaturePad({
         "
         >
           <Save size={18} />
-          Save Signature
+
+          {loading
+            ? "Saving..."
+            : "Save Signature"}
         </button>
       </div>
 
@@ -212,13 +224,10 @@ export default function SignaturePad({
         p-4
         rounded-2xl
         bg-blue-50
-        dark:bg-slate-800
       "
       >
-        <p className="text-sm text-slate-600 dark:text-slate-300">
-          🔒 Your signature is securely stored
-          and linked to the document audit log.
-        </p>
+        🔒 Signature is linked
+        to audit logs.
       </div>
     </div>
   );
