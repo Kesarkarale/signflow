@@ -24,7 +24,6 @@ e: React.FormEvent<HTMLFormElement>
 ) {
 e.preventDefault();
 
-```
 setLoading(true);
 
 const result = await signIn(
@@ -47,13 +46,11 @@ if (result?.error) {
 
 window.location.href =
   "/dashboard";
-```
 
 }
 
 return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
 
-```
   <div className="hidden lg:flex flex-col justify-center p-16 bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-900 text-white">
 
     <h1 className="text-6xl font-bold mb-6">
@@ -201,8 +198,6 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-background">
   </div>
 
 </div>
-```
-
 );
 }
 
