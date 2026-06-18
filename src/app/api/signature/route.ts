@@ -1,4 +1,4 @@
- import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -8,28 +8,21 @@ export async function POST(req: Request) {
     const {
       documentId,
       signerId,
-      signatureImage,
+      imageUrl,
+      x,
+      y,
+      page,
     } = body;
-
-    if (
-      !documentId ||
-      !signerId ||
-      !signatureImage
-    ) {
-      return NextResponse.json(
-        {
-          error: "Missing required fields",
-        },
-        { status: 400 }
-      );
-    }
 
     const signature =
       await prisma.signature.create({
         data: {
           documentId,
           signerId,
-          signatureImage,
+          imageUrl,
+          x,
+          y,
+          page,
           status: "SIGNED",
         },
       });
@@ -54,9 +47,8 @@ export async function POST(req: Request) {
       success: true,
       signature,
     });
-
   } catch (error) {
-    console.error("Signature Save Error:", error);
+    console.error(error);
 
     return NextResponse.json(
       {
