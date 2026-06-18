@@ -2,62 +2,60 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-try {
-const body = await req.json();
+  try {
+    const body = await req.json();
 
-const {
-  documentId,
-  signerId,
-  imageUrl,
-  x = 0,
-  y = 0,
-  page = 1,
-} = body;
+    const {
+      documentId,
+      signerId,
+      signatureImage,
+    } = body;
 
-if (!documentId || !signerId) {
-  return NextResponse.json(
-    { error: "Missing required fields" },
-    { status: 400 }
-  );
-}
+    if (
+      !documentId ||
+      !signerId ||
+      !signatureImage
+    ) {
+      return NextResponse.json(
+        { error: "Missing fields" },
+        { status: 400 }
+      );
+    }
 
-const signature = await prisma.signature.create({
-  data: {
-    documentId,
-    signerId,
-    imageUrl,
-    x,
-    y,
-    page,
-    status: "SIGNED",
-  },
-});
+    const signature =
+      await prisma.signature.create({
+        data: {
+          documentId,
+          signerId,
+          signatureImage,
+        },
+      });
 
-await prisma.document.update({
-  where: {
-    id: documentId,
-  },
-  data: {
-    status: "SIGNED",
-  },
-});
+    await prisma.document.update({
+      where: {
+        id: documentId,
+      },
+      data: {
+        status: "SIGNED",
+      },
+    });
 
-await prisma.auditLog.create({
-  data: {
-    documentId,
-    action: "DOCUMENT_SIGNED",
-  },
-});
+    await prisma.auditLog.create({
+      data: {
+        action: "DOCUMENT_SIGNED",
+        documentId,
+      },
+    });
 
-return NextResponse.json(signature);
+    return NextResponse.json(
+      signature
+    );
+  } catch (error) {
+    console.log(error);
 
-} catch (error) {
-console.error(error);
-
-return NextResponse.json(
-  { error: "Failed to save signature" },
-  { status: 500 }
-);
-
-}
+    return NextResponse.json(
+      { error: "Failed" },
+      { status: 500 }
+    );
+  }
 }
