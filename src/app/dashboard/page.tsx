@@ -1,8 +1,17 @@
 import { prisma } from "@/lib/prisma"; 
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import DashboardStats from "@/components/dashboardstats";
 import DashboardHeader from "@/components/dashboard-header";
 import ProfileCard from "@/components/profile-card";
 import AnalyticsChart from "@/components/analytics-chart";
+export default async function DashboardPage() {
+  const session = await getServerSession(authConfig);
+
+  if (!session) {
+    redirect("/login");
+  }
 export default async function DashboardPage() {
  
  const totalDocs =
