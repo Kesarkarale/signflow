@@ -22,10 +22,10 @@ export default function LoginPage() {
     const result = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      redirect: true,
     });
 
-    setLoading(false);
+    setLoading(true);
 
     if (result?.error) {
       alert("Invalid email or password");
