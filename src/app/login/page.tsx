@@ -33,7 +33,7 @@ export default function LoginPage() {
     }
 
     // ✅ IMPORTANT: use router instead of window.location
-    router.push("/dashboard");
+    window.location.href = "/dashboard";
   }
 
   return (
