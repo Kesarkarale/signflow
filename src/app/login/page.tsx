@@ -14,28 +14,34 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+   async function handleLogin(
+  e: React.FormEvent<HTMLFormElement>
+) {
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
 
-   const result = await signIn("credentials", {
-  email,
-  password,
-  redirect: false,
-});
+  const result = await signIn(
+    "credentials",
+    {
+      email,
+      password,
+      redirect: false,
+    }
+  );
 
-console.log("LOGIN RESULT:", result);
+  setLoading(false);
 
-if (result?.error) {
-  alert(result.error);
-  return;
-}
+  console.log(result);
 
-alert("Login Success"); 
-window.location.href = "/dashboard";
+  if (result?.error) {
+    alert("Invalid email or password");
+    return;
   }
 
+  router.push("/dashboard");
+  router.refresh();
+}
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-background">
 
