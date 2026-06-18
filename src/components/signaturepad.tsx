@@ -29,48 +29,61 @@ export default function SignaturePad({
     sigRef.current?.clear();
   };
 
-  const saveSignature = async () => {
-    if (
-      !sigRef.current ||
-      sigRef.current.isEmpty()
-    ) {
-      alert(
-        "Please draw your signature first."
-      );
-      return;
-    }
+ const saveSignature = async () => {
+  if (
+    !sigRef.current ||
+    sigRef.current.isEmpty()
+  ) {
+    alert("Please draw your signature first.");
+    return;
+  }
 
-    const data =
-      sigRef.current
-        .getTrimmedCanvas()
-        .toDataURL("image/png");
+  const data =
+    sigRef.current
+      .getTrimmedCanvas()
+      .toDataURL("image/png");
 
-    try {
-      const res = await fetch(
-        "/api/signature",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-         imageUrl: data
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error();
+  try {
+    const res = await fetch(
+      "/api/signature",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          documentId,
+          signerId,
+          imageUrl: data,
+          x: 0,
+          y: 0,
+          page: 1,
+        }),
       }
+    );
 
-      alert(
-        "Signature saved successfully!"
-      );
-    } catch {
-      alert(
-        "Failed to save signature"
+    const result =
+      await res.json();
+
+    if (!res.ok) {
+      throw new Error(
+        result.error
       );
     }
-  };
+
+    alert(
+      "Signature saved successfully!"
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      "Failed to save signature"
+    );
+  }
+};
 
   return (
     <div
