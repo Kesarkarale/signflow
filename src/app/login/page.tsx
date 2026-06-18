@@ -19,20 +19,23 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-    });
+   const result = await signIn("credentials", {
+  email,
+  password,
+  redirect: false,
+});
 
-    setLoading(true);
+console.log("LOGIN RESULT:", result);
 
-    if (result?.error) {
-      alert("Invalid email or password");
-      return;
-    }
+if (result?.error) {
+  alert(result.error);
+  return;
+}
 
-    window.location.href = "/dashboard";
+alert("Login Success");
+if (result?.ok) {
+  window.location.href = "/dashboard";
+}
   }
 
   return (
