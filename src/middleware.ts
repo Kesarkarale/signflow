@@ -8,9 +8,27 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const isAuthPage = req.nextUrl.pathname.startsWith("/login");
+  const { pathname } = req.nextUrl;
 
-  if (!token && !isAuthPage) {
+  // allow login page
+  if (pathname.startsWith("/login")) {
+    return NextResponse.next();
+  }
+
+  // protect routes
+  const protectedRoutes = [
+    "/dashboard",
+    "/documents",
+    "/upload",
+    "/audit",
+    "/settings",
+  ];
+
+  const isProtected = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
+
+  if (isProtected && !token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
@@ -18,5 +36,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/documents/:path*", "/upload/:path*"],
+  matcher: ["/dashboard/:path*", "/documents/:path*", "/upload/:path*", "/audit/:path*", "/settings/:path*"],
 };
