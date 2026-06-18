@@ -74,32 +74,18 @@ model Document {
 }
 
 model Signature {
-  id String @id @default(cuid())
+  id             String   @id @default(cuid())
+  documentId     String
+  signerId       String
 
-  documentId String
-<<<<<<< HEAD
-  signerId String
-=======
-  signerId   String
->>>>>>> 57ab464 (install @prisma/client)
+  signatureImage String   @db.Text
 
-  imageUrl String?
+  status         String   @default("SIGNED")
 
-  x Float @default(0)
-  y Float @default(0)
+  createdAt      DateTime @default(now())
 
-  page Int @default(1)
-
-  status String @default("PENDING")
-<<<<<<< HEAD
-=======
-
-  createdAt DateTime @default(now())
-
-  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-
-  signer User @relation(fields: [signerId], references: [id])
->>>>>>> 57ab464 (install @prisma/client)
+  document       Document @relation(fields: [documentId], references: [id])
+  signer         User     @relation(fields: [signerId], references: [id])
 }
 
 
