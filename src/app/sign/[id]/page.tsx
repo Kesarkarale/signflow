@@ -40,10 +40,16 @@ export default async function SignPage({
             PDF Preview
           </h2>
 
-          <iframe
-            src={document.fileUrl}
-            className="w-full h-[700px] rounded-xl border"
-          />
+          {document.fileUrl ? (
+  <iframe
+    src={document.fileUrl}
+    className="w-full h-[700px] rounded-xl border"
+  />
+) : (
+  <div className="p-6 text-gray-500 border rounded-xl">
+    No document available to preview
+  </div>
+)}
         </div>
 
         <div className="bg-white border rounded-2xl p-6">
