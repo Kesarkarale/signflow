@@ -76,10 +76,16 @@ return ( <div className="p-8 space-y-8">
 
         </div>
 
-        <iframe
-          src={document.fileUrl}
-          className="w-full h-[700px]"
-        />
+       {document.fileUrl ? (
+              <iframe
+                src={document.fileUrl}
+                className="w-full h-[700px]"
+              />
+            ) : (
+              <div className="p-6 text-gray-500">
+                No file uploaded
+              </div>
+            )}
 
       </div>
 
