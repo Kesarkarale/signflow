@@ -1,14 +1,6 @@
 import "./globals.css";
 import Providers from "./providers";
 
-export const metadata = {
-  title: "SignFlow",
-  description: "Professional E-Signature Platform",
-  icons: {
-    icon: "/favicon.png",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
