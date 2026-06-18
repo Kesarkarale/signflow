@@ -43,19 +43,19 @@ model Document {
 }
 
 model Signature {
-  id             String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  documentId     String
-  signerId       String
+  documentId String
+  signerId String
 
-  signatureImage String   @db.Text
+  imageUrl String?
 
-  status         String   @default("SIGNED")
+  x Float @default(0)
+  y Float @default(0)
 
-  createdAt      DateTime @default(now())
+  page Int @default(1)
 
-  document       Document @relation(fields: [documentId], references: [id])
-  signer         User     @relation(fields: [signerId], references: [id])
+  status String @default("PENDING")
 }
 
 
