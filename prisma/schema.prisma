@@ -58,6 +58,7 @@ model Signature {
   signer         User     @relation(fields: [signerId], references: [id])
 }
 
+
 model AuditLog {
 id           String      @id @default(cuid())
 
