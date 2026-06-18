@@ -5,7 +5,6 @@ export async function POST(req: Request) {
 try {
 const body = await req.json();
 
-```
 const {
   documentId,
   signerId,
@@ -51,17 +50,14 @@ await prisma.auditLog.create({
 });
 
 return NextResponse.json(signature);
-```
 
 } catch (error) {
 console.error(error);
 
-```
 return NextResponse.json(
   { error: "Failed to save signature" },
   { status: 500 }
 );
-```
 
 }
 }
