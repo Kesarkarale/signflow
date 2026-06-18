@@ -32,8 +32,8 @@ export default function LoginPage() {
       return;
     }
 
-    // ✅ IMPORTANT: use router instead of window.location
-    window.location.href = "/dashboard";
+   router.push("/dashboard");
+router.refresh();
   }
 
   return (
