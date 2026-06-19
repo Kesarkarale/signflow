@@ -9,8 +9,8 @@ export default function Loading() {
           <Image
             src="/logo.png"
             alt="SignFlow"
-            width={90}
-            height={90}
+            width={180}
+            height={180}
             priority
           />
         </div>
