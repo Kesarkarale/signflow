@@ -308,7 +308,7 @@ Freelance Contract
 
 <div
 className="
-bg-white
+bg-blue
 dark:bg-slate-900
 border
 dark:border-slate-800
