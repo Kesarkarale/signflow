@@ -259,7 +259,7 @@ p-6
 
 <div className="flex items-center gap-3 mb-4">
 <Sparkles
-className="text-blue-500"
+className="text-white-500"
 />
 
 <h3 className="font-bold">
