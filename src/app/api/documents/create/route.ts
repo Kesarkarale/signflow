@@ -1,30 +1,40 @@
-import { prisma } from "@/lib/prisma";
+ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authConfig);
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
-    const { title, fileUrl, ownerId } = body;
+    const { title, fileUrl } = body;
 
-    if (!title || !fileUrl || !ownerId) {
+    if (!title || !fileUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    const document =
-      await prisma.document.create({
-        data: {
-          title,
-          fileUrl,
-          ownerId,
-          signToken: randomUUID(),
-          status: "PENDING",
-        },
-      });
+    const document = await prisma.document.create({
+      data: {
+        title,
+        fileUrl,
+        ownerId: session.user.id,
+        signToken: randomUUID(),
+        status: "PENDING",
+      },
+    });
 
     await prisma.auditLog.create({
       data: {
@@ -33,10 +43,13 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(document);
+    return NextResponse.json({
+      success: true,
+      document,
+    });
 
   } catch (error) {
-    console.error(error);
+    console.error("CREATE DOCUMENT ERROR:", error);
 
     return NextResponse.json(
       { error: "Failed to create document" },
