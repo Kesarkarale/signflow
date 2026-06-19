@@ -248,7 +248,7 @@ Create Document
 
 <div
 className="
-bg-black
+bg-white
 dark:bg-slate-900
 border
 dark:border-slate-800
@@ -259,7 +259,7 @@ p-6
 
 <div className="flex items-center gap-3 mb-4">
 <Sparkles
-className="text-black-500"
+className="text-yellow-500"
 />
 
 <h3 className="font-bold">
@@ -275,7 +275,7 @@ setContent(
 "Employment Agreement between Company and Employee..."
 )
 }
-className="w-full text-left p-3 rounded-xl bg-slate-100"
+className="w-full text-left p-3 rounded-xl bg-blue-100"
 >
 Employment Contract
 </button>
@@ -286,7 +286,7 @@ setContent(
 "Non Disclosure Agreement..."
 )
 }
-className="w-full text-left p-3 rounded-xl bg-slate-100"
+className="w-full text-left p-3 rounded-xl bg-blue-100"
 >
 NDA Agreement
 </button>
