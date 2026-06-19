@@ -2,17 +2,35 @@ import Image from "next/image";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950">
-      <div className="relative">
-        <div className="absolute inset-0 rounded-full border-4 border-blue-500 animate-ping"></div>
+    <div className="flex min-h-screen items-center justify-center bg-slate-950">
+      <div className="flex flex-col items-center gap-4">
 
-        <Image
-          src="/logo.png"
-          alt="SignFlow"
-          width={90}
-          height={90}
-          className="animate-pulse"
-        />
+        <div className="animate-pulse">
+          <Image
+            src="/logo.png"
+            alt="SignFlow"
+            width={90}
+            height={90}
+            priority
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="h-3 w-3 rounded-full bg-blue-500 animate-bounce" />
+          <div
+            className="h-3 w-3 rounded-full bg-blue-500 animate-bounce"
+            style={{ animationDelay: "0.15s" }}
+          />
+          <div
+            className="h-3 w-3 rounded-full bg-blue-500 animate-bounce"
+            style={{ animationDelay: "0.3s" }}
+          />
+        </div>
+
+        <p className="text-slate-400 text-sm">
+          Loading Dashboard...
+        </p>
+
       </div>
     </div>
   );
