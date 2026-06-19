@@ -64,11 +64,25 @@ http://localhost:3000
 
 ## Screenshots
 
-* Login Page
-* Register Page
-* Dashboard
-* Document Management
-* Signature Module
+* **Login Page**
+  
+![Login Page](login.png)
+
+* **Register Page**
+  
+![Register Page](register.png)
+
+* **Dashboard**
+  
+  ![Dashboard](dashboard.png)
+  
+* **Document Management**
+  
+![Document Manaement](document.png)
+
+* **Upload Page**
+  
+  ![Upload Page](upload.png)
 
 ## Project Highlights
 
