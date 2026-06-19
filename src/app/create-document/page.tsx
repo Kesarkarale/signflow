@@ -275,7 +275,7 @@ setContent(
 "Employment Agreement between Company and Employee..."
 )
 }
-className="w-full text-left p-3 rounded-xl bg-blue-100"
+className="w-full text-left p-3 rounded-xl bg-white-100"
 >
 Employment Contract
 </button>
@@ -286,7 +286,7 @@ setContent(
 "Non Disclosure Agreement..."
 )
 }
-className="w-full text-left p-3 rounded-xl bg-blue-100"
+className="w-full text-left p-3 rounded-xl bg-white-100"
 >
 NDA Agreement
 </button>
@@ -297,7 +297,7 @@ setContent(
 "Freelance Service Agreement..."
 )
 }
-className="w-full text-left p-3 rounded-xl bg-slate-100"
+className="w-full text-left p-3 rounded-xl bg-white-100"
 >
 Freelance Contract
 </button>
