@@ -19,7 +19,7 @@ export default function Loading() {
           <div className="h-3 w-3 rounded-full bg-blue-500 animate-bounce" />
           <div
             className="h-3 w-3 rounded-full bg-blue-500 animate-bounce"
-            style={{ animationDelay: "0.15s" }}
+            style={{ animationDelay: "0.10s" }}
           />
           <div
             className="h-3 w-3 rounded-full bg-blue-500 animate-bounce"
