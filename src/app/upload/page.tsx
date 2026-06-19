@@ -40,7 +40,7 @@ try {
       body: JSON.stringify({
         title,
         fileUrl,
-        ownerId: "TEMP_USER_ID",
+        
       }),
     }
   );
