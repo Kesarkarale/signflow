@@ -239,7 +239,15 @@ export default async function SignPage({
       </div>
 
     </div>
-
+{/* Go to Dashboard Button */}
+<div className="max-w-7xl mx-auto mt-10 flex justify-center">
+  <a
+    href="/dashboard"
+    className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg transition"
+  >
+    Go to Dashboard
+  </a>
+</div>
   </div>
 );
 }
