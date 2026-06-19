@@ -248,7 +248,7 @@ Create Document
 
 <div
 className="
-bg-white
+bg-black
 dark:bg-slate-900
 border
 dark:border-slate-800
